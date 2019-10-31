@@ -5,7 +5,6 @@
 # sparkyMomoTracking
 
 A basic demo configuration for Momentum 4.x with SparkPost Signals.
-
 Accompanies the SparkPost [blog series](https://www.sparkpost.com/blog/deploy-sparkpost-signals-for-on-premises-part-1/).
 
 Standard files installed by Momentum and by Signals Agent are generally not shown here.
@@ -24,8 +23,6 @@ Whereas TLS v1.1 (and v1.2) should succeed, displaying the peer certificate
 ```bash
 openssl s_client -connect momo.signalsdemo.trymsys.net:587 -starttls smtp -tls1_1
 ```
-
-openssl s_client -connect momo.signalsdemo.trymsys.net:587 -starttls smtp -tls1_1
 
 ### Checking Return-Path (bounce domain) and FBL ports
 
