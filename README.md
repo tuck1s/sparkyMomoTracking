@@ -24,6 +24,28 @@ Whereas TLS v1.1 (and v1.2) should succeed, displaying the peer certificate
 openssl s_client -connect momo.signalsdemo.trymsys.net:587 -starttls smtp -tls1_1
 ```
 
+gives
+```
+CONNECTED(00000005)
+depth=2 C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert Global Root CA
+verify return:1
+depth=1 C = US, O = DigiCert Inc, OU = www.digicert.com, CN = RapidSSL RSA CA 2018
+verify return:1
+depth=0 CN = *.trymsys.net
+verify return:1
+---
+Certificate chain
+ 0 s:/CN=*.trymsys.net
+   i:/C=US/O=DigiCert Inc/OU=www.digicert.com/CN=RapidSSL RSA CA 2018
+ 1 s:/C=US/O=DigiCert Inc/OU=www.digicert.com/CN=RapidSSL RSA CA 2018
+   i:/C=US/O=DigiCert Inc/OU=www.digicert.com/CN=DigiCert Global Root CA
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+:
+:
+```
+
 ### Checking Return-Path (bounce domain) and FBL ports
 
 Check MX record is set up
