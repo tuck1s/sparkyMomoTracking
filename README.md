@@ -27,31 +27,27 @@ openssl s_client -connect momo.signalsdemo.trymsys.net:587 -starttls smtp -tls1_
 ### Checking Return-Path (bounce domain) and FBL ports
 
 Check MX record is set up
-```bash
+```
 dig MX +short momo.signalsdemo.trymsys.net
 ```
-```
-10 momo.signalsdemo.trymsys.net.
-```
+> `10 momo.signalsdemo.trymsys.net.`
 
-```bash
+```
 host momo.signalsdemo.trymsys.net
 ```
-```
-momo.signalsdemo.trymsys.net has address 34.211.7.3
-momo.signalsdemo.trymsys.net mail is handled by 10 momo.signalsdemo.trymsys.net.
-```
 
-Check that port 25 is open and ready to accept bounces
-```bash
+> `momo.signalsdemo.trymsys.net has address 34.211.7.3`
+> `momo.signalsdemo.trymsys.net mail is handled by 10 momo.signalsdemo.trymsys.net.`
+
+Check that port 25 is open and ready to accept bounces:
+
+```
 telnet momo.signalsdemo.trymsys.net 25
 ```
 
-```
-Trying 34.211.7.3...
-Connected to momo.signalsdemo.trymsys.net.
-Escape character is '^]'.
-220 2.0.0 ip-172-31-22-249.us-west-2.compute.internal ESMTP ecelerity 4.3.0.67725 r(Core:4.3.0.0) Thu, 31 Oct 2019 20:22:27 +0000
-```
+> `Trying 34.211.7.3...`
+> `Connected to momo.signalsdemo.trymsys.net.`
+> `Escape character is '^]'.`
+> `220 2.0.0 ip-172-31-22-249.us-west-2.compute.internal ESMTP ecelerity 4.3.0.67725 r(Core:4.3.0.0) Thu, 31 Oct 2019 20:22:27 +0000`
 
 Repeat the same tests for your FBL domain e.g. `fbl.momo.signalsdemo.trymsys.net`.
