@@ -10,7 +10,7 @@ local mod = {};
 
 --[[ Modify these as necessesary for your demo ]]--
 local sinkdomain = "54.245.21.30"
-local safedomains = { "mblox.sms.agg", "validator.messagesystems.com", "messagesystems.com", "sparkpost.com", "momo.signalsdemo.trymsys.net", "fbl.momo.signalsdemo.trymsys.net" }
+local safedomains = { "validator.messagesystems.com", "messagesystems.com", "sparkpost.com", "momo.signalsdemo.trymsys.net", "fbl.momo.signalsdemo.trymsys.net" }
 
 --[[ each rcpt_to function ]]--
 function mod:validate_data_spool_each_rcpt (msg, accept, vctx)
@@ -19,18 +19,11 @@ function mod:validate_data_spool_each_rcpt (msg, accept, vctx)
   if msg:context_get(msys.core.VCTX_CONN, "can_relay") == "false" then
     msg:code("553", "Not today, buddy");
     vctx:set_code("553", "Not today, buddy");
-    print("This sender can relay");
-
+    print("This sender can not relay");
   end
 
   return msys.core.VALIDATE_CONT;
 end 
-
---[[ each MSG_GEN rcpt_to function ]]--
-function mod:msg_gen_data_spool(msg)
---  print ("Using msg_gen_data_spool");
-  return msys.core.VALIDATE_CONT;
-end
 
 --[[ Set Binding function ]]--
 function mod:validate_set_binding(msg)
@@ -41,9 +34,7 @@ function mod:validate_set_binding(msg)
   local mylocalpart = tostring(localpart_str);
   local validdomain = "false"
   local bindingname = msg:header("X-Binding")
-  if bindingname[1] then 
-    msg:context_set(msys.core.VCTX_MESS, "mo_binding", bindingname[1])
-  end
+  
 -- Test to see if the TO domain is in the safe list
   for i,v in ipairs(safedomains) do
     if v == mydomain then
@@ -67,7 +58,6 @@ function mod:validate_set_binding(msg)
     else 
       local err = msg:binding("generic");
     end
--- print(msg:context_get(msys.core.ECMESS_CTX_MESS, 'mo_campaign_id'));
   return msys.core.VALIDATE_CONT;
 end;
 
